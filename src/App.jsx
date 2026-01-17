@@ -1,10 +1,10 @@
+import Hero from "./sections/Hero";
 
 function App() {
   return (
-    <>
-  
-      <h1 className="flex h-full w-screen items-center justify-center">Hi react</h1>
-    </>
+    <div>
+      <Hero></Hero>
+    </div>
   );
 }
 

@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 const Navbar = () => {
   //Taking ref of this nav for gsap animating
   const navRef = useRef(null);
-  const linksRef = useRef([]);
+//   const linksRef = useRef([]);
   return (
     <nav
       ref={navRef}

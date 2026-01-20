@@ -3,6 +3,7 @@ import { socials } from "../constants/index";
 import { useGSAP } from "@gsap/react";
 const Navbar = () => {
   //Taking ref of this nav for gsap animating
+  //ref var fr gsap
   const navRef = useRef(null);
   const linksRef = useRef([]);
   const contactsRef = useRef(null);

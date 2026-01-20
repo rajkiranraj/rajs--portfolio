@@ -9,7 +9,7 @@ const Navbar = () => {
   const topLineRef = useRef(null);
   const bottomLineRef = useRef(null);
   useGSAP(() => {
-    //gsap
+    
     gsap.set(navRef.current, { xPercent: 100 });
     gsap.set([linksRef.current, contactsRef.current], {
       autoAlpha: 0,

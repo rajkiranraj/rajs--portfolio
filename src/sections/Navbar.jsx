@@ -1,4 +1,5 @@
-import React, { gsap, useRef } from "react";
+import React, { useRef, useState } from "react";
+import gsap from "gsap";
 import { socials } from "../constants/index";
 import { useGSAP } from "@gsap/react";
 const Navbar = () => {
@@ -9,14 +10,53 @@ const Navbar = () => {
   const contactsRef = useRef(null);
   const topLineRef = useRef(null);
   const bottomLineRef = useRef(null);
+  const tl = useRef(null);
+  const [isHamOpen, setHamOpen] = useState(false);
   useGSAP(() => {
-    
     gsap.set(navRef.current, { xPercent: 100 });
     gsap.set([linksRef.current, contactsRef.current], {
       autoAlpha: 0,
       x: -20,
     });
+    tl.current = gsap
+      .timeline({ paused: true })
+      .to(navRef.current, {
+        xPercent: 0,
+        duration: 1,
+        ease: "power3.out",
+      })
+      .to(
+        linksRef.current,
+        {
+          autoAlpha: 1,
+          x: 0,
+          stagger: 0.1,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "<",
+      )
+      .to(
+        contactsRef.current,
+        {
+          autoAlpha: 1,
+          x: 0,
+          stagger: 0.1,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "<+0.2",
+      );
   });
+
+  const toggleMenu = () => {
+    if (isHamOpen) {
+      tl.current.reverse();
+    } else {
+      tl.current.play();
+    }
+    setHamOpen(!isHamOpen);
+  };
   return (
     <>
       <nav
@@ -67,7 +107,8 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-col fixed z-50 items-center justify-center gap-1 transition-all duration-300 bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10">
+      {/* //Hamburger menu */}
+      <div onClick={toggleMenu} className="flex flex-col fixed z-50 items-center justify-center gap-1 transition-all duration-300 bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10">
         <span
           ref={topLineRef}
           className="w-8 block h-0.5 bg-white rounded-full origin-center"
